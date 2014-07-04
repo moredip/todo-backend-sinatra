@@ -1,6 +1,8 @@
 source 'https://www.rubygems.org'
 ruby '2.0.0'
 
+gem 'rake'
+
 gem 'sinatra'
 
 group :production do
