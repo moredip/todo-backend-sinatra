@@ -1,7 +1,7 @@
 Todo-Backend in Sinatra
 ====================
 
-This is a simple implementation of the [Todo-Backend API spec](https://github.com/moredip/todo-backend).
+This is a simple implementation of the [Todo-Backend API spec](http://todo-backend.thepete.net/).
 
 It does not persist todos anywhere; they are just stored in a ruby Hash.
 
