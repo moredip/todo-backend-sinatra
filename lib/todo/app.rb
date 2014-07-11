@@ -28,7 +28,7 @@ class TodoApp < Sinatra::Base
   end
 
   def todo_url(todo)
-    uri( "/todos/#{todo.fetch("uid")}" )
+    uri( "/todos/#{todo.fetch(:uid)}" )
   end
 
   def todo_repr(todo)
@@ -88,6 +88,7 @@ class TodoApp < Sinatra::Base
   patch "/todos/:todo_uid" do
     todo = lookup_todo_or_404
     todo.merge!( json_body )
+    @repo[todo.fetch(:uid)] = todo
     todo_repr(todo).to_json
   end
 end

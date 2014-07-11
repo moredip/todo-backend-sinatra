@@ -18,6 +18,10 @@ class TodoRepo
     @store[uid]
   end
 
+  def []=(uid,todo)
+    @store[uid] = todo
+  end
+
   def all_todos
     @store.values
   end
