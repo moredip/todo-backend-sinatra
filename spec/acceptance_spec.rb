@@ -6,13 +6,17 @@ require 'rack/test'
 
 require 'pry'
 
-require_relative '../lib/todo_app'
+$LOAD_PATH.unshift File.expand_path( "../../lib", __FILE__ )
+
+require 'todo/app'
+require 'todo/repo'
 
 describe 'acceptance specs' do
   include Rack::Test::Methods
 
   def app
-    TodoApp.new
+    repo = TodoRepo.new
+    TodoApp.new(repo)
   end
 
   def last_response_json
