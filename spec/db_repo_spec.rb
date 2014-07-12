@@ -46,6 +46,10 @@ describe DbRepo do
       refetched_todo = repo.fetch( created_todo[:uid] )
       expect(refetched_todo).to include( completed: false )
     end
+
+    it 'copes with nonsense being passed in' do
+      repo.insert( title: "blah", nonsense: "just go ahead and ignore me" )
+    end
   end
 
   describe 'fetch_all' do

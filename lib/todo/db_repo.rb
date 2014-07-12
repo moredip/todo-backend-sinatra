@@ -41,14 +41,21 @@ class DbRepo
   def insert(todo)
     todo[:uid] = SecureRandom.uuid
     todo[:completed] = false
-    @todos.insert todo
+    @todos.insert pruned_todo_attributes(todo)
     todo
   end
   alias_method :add_todo, :insert
 
   def update(uid,todo_attrs)
-    @todos.where(:uid=>uid).update(todo_attrs)
+    @todos.where(:uid=>uid).update(pruned_todo_attributes(todo_attrs))
   end
   alias_method :[]=, :update
+
+
+  private
+
+  def pruned_todo_attributes(attrs)
+    attrs.select{ |k,v| [:uid,:title,:completed].include?(k) }
+  end
 
 end
