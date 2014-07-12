@@ -20,7 +20,7 @@ class TodoApp < Sinatra::Base
   end
 
   def json_body
-    JSON.parse(request.env["rack.input"].read)
+    JSON.parse(request.env["rack.input"].read, :symbolize_names=> true)
   end
 
   def todos_url
