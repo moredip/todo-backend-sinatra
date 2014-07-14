@@ -15,6 +15,7 @@ class DbRepo
     @db.create_table? :todos do
       String :uid, :primary_key => true
       String :title
+      Integer :order, :default => 0
       Boolean :completed
     end
   end
@@ -41,8 +42,9 @@ class DbRepo
   def insert(todo)
     todo[:uid] = SecureRandom.uuid
     todo[:completed] = false
-    @todos.insert pruned_todo_attributes(todo)
-    todo
+    pruned_todo = pruned_todo_attributes(todo)
+    @todos.insert pruned_todo
+    pruned_todo
   end
   alias_method :add_todo, :insert
 
@@ -55,7 +57,7 @@ class DbRepo
   private
 
   def pruned_todo_attributes(attrs)
-    attrs.select{ |k,v| [:uid,:title,:completed].include?(k) }
+    attrs.select{ |k,v| [:uid,:title,:completed,:order].include?(k) }
   end
 
 end
