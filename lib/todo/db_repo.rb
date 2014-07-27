@@ -2,6 +2,10 @@ require 'sequel'
 require 'securerandom'
 
 class DbRepo
+  def self.from_database_url_env_var
+    new( ENV.fetch('DATABASE_URL') )
+  end
+
   def initialize(url)
     @db = Sequel.connect(url)
     @todos = @db[:todos]

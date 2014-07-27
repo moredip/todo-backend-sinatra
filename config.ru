@@ -5,8 +5,7 @@ require 'todo/repo'
 require 'todo/db_repo'
 
 def app
-  db_url = ENV['DATABASE_URL']
-  db_repo = DbRepo.new(db_url)
+  db_repo = DbRepo.from_database_url_env_var
   db_repo.prep!
   TodoApp.new( db_repo )
 end
